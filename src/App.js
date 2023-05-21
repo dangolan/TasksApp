@@ -1,24 +1,38 @@
 import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import LoginPage from './LoginPage';
+import UserPage from './UserPage'
 import './App.css';
 
+
 function App() {
+  const [userId, setUserId] = useState(null);
+
+  // Load userId from localStorage when the page is loaded
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setUserId(storedUserId);
+    }
+  }, []);
+
+  const handleLogin = (id) => {
+    // Save userId to localStorage when the user logs in
+    localStorage.setItem('userId', id);
+    setUserId(id);
+  };
+
+  const handleLogout = () => {
+    // Remove userId from localStorage when the user logs out
+    localStorage.removeItem('userId');
+    setUserId(null);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+     <div className="App">
+     {userId ? <UserPage userId={userId} onLogout={handleLogout} /> : <LoginPage onLogin={handleLogin} />}
+   </div>
+
   );
 }
 
