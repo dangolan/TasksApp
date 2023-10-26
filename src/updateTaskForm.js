@@ -4,16 +4,15 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DesktopDateTimePicker } from '@mui/x-date-pickers';
 import { DesktopTimePicker } from '@mui/x-date-pickers';
-import moment from 'moment';
 import dayjs from 'dayjs';
 import { data } from 'jquery';
 
 
 
-function AddTaskForm({ onSubmit }) {
-    const today = new Date();
-
-    const [selectedDate, setSelectedDate] = useState(dayjs(today));
+function UpdateTaskForm({ onSubmit, task}) {
+    console.log(task.name)
+    const deadline = new Date(task.deadline)
+    const [selectedDate, setSelectedDate] = useState(dayjs(deadline));
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
@@ -46,13 +45,14 @@ function AddTaskForm({ onSubmit }) {
                         className="form-control"
                         placeholder="New Task"
                         aria-describedby="emailHelp"
+                        defaultValue={task.name}
                     />
                 </div>
 
-                <CategoryField cateroryFromUser = {""}/>
+                <CategoryField  cateroryFromUser ={task.category}/>
 
                 <div className="mb-3">
-                    <select id="task-priority-input" name="priority" className="form-control">
+                    <select id="task-priority-input" name="priority" className="form-control" defaultValue={task.priority}>
                         <option value="" disabled selected>Select Priority</option>
                         <option value="1">High</option>
                         <option value="2">Medium</option>
@@ -70,10 +70,10 @@ function AddTaskForm({ onSubmit }) {
 
                 <div className="mb-3">
                     <input type="text"  pattern="[0-9]+([.,][5]+)?"  id="task-duration-input" name="duration" className="form-control"
-                        placeholder="Duration" required />
+                        placeholder="Duration" required  defaultValue={task.duration} />
                 </div>
                 <div className='class="d-grid gap-2"'>
-                    <button className="btn  btn-dark" style={{ width: '100%' }} type="submit">Add Task</button>
+                    <button className="btn  btn-dark" style={{ width: '100%' }} type="submit">Update Task</button>
                 </div>
             </form>
             <br></br>
@@ -83,4 +83,4 @@ function AddTaskForm({ onSubmit }) {
     );
 }
 
-export default AddTaskForm;
+export default UpdateTaskForm;

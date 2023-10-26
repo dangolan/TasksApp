@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-function TaskList({ tasks, onDelete }) {
+function TaskList({ tasks, onDelete ,hedleUpdate}) {
   const [sortedTasks, setSortedTasks] = useState(tasks);
   useEffect(() => {
     setSortedTasks(tasks);
@@ -323,12 +323,21 @@ function TaskList({ tasks, onDelete }) {
                     {getTimeLeft(task.deadline)} - {TimeToS(task.deadline)}
                   </small>
                 </div>
+                <div  className="task-btns">
+                <button
+                  className="btn btn-warning  btn-sm"
+                  onClick={() => hedleUpdate(task)}
+                >
+                 Update
+                </button>
                 <button
                   className="btn btn-danger btn-sm task-delete-btn"
                   onClick={() => handleDelete(task._id)}
                 >
                   <FontAwesomeIcon icon={faTrash} />
                 </button>
+                </div>
+               
                 <div className="task-content">
                   <p className="mb-1">{task.category}</p>
                   <small>duration is about {task.duration} hours </small>

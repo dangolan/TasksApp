@@ -59,10 +59,16 @@
 }
 
 .task-delete-btn {
+  margin-left: 5px;
+}
+.task-btns{
   position: absolute;
   bottom: 0;
   right: 0;
   margin: 10px;
+}
+.task-update-btn{
+  margin: 1px;
 }
 
 

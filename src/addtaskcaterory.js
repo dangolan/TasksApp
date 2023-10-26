@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 
-function TaskForm() {
-  const [category, setCategory] = useState('');
+function TaskForm({cateroryFromUser}) {
+  const [category, setCategory] = useState(cateroryFromUser);
 
   const handleCategorySelect = (event) => {
     const category = event.target.textContent;
